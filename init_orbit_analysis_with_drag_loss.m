@@ -29,7 +29,7 @@ P_solar = 4.56e-6;  % solar radiation pressure
 R_E = 6.3781e6;     %Earth radius
 
 % Attitude
-attitude_string = "z nadir, SA towards sun";
+attitude_string = "z+ towards the sun, 0.2 deg/s rotation";
 sun_pointing = 1;   % 0: sun pointing out of plane, 1: sun pointing in orbit plane
 sun_pointing_SA = 0;    %0: sun ponting SA, 1: pointing in z+
 theta = deg2rad(0);    %add rotation around z to attitude
@@ -48,13 +48,13 @@ alpha_acc = sqrt(0.7);
 % aph = [12, 18, 22, 22, 22, mean(aph_33_12), mean(aph_57_36)];
 
 
-mission.StartDate = datetime(2020, 12, 21);     %2015-03-20 new mooon and equinox %2016-06-20 full moon
+mission.StartDate = datetime(2020, 09, 21);     %2015-03-20 new mooon and equinox %2016-06-20 full moon
 mission.StartDateJD = juliandate(mission.StartDate);
 start_year = year(mission.StartDate);
 start_doy = floor(mission.StartDateJD - juliandate(start_year, 1, 1))+1;
 
 
-orbit = "SSTO";
+orbit = "GEO";
 
 
 switch(orbit)
@@ -84,7 +84,7 @@ switch(orbit)
         e = 0;
 
         % GEO longitude
-        geo_lla = [0, 64, 0];  %lat, long, alt
+        geo_lla = [0, 180, 0];  %lat, long, alt
         start_position = lla2eci(geo_lla, [year(mission.StartDate), month(mission.StartDate), day(mission.StartDate), ...
             hour(mission.StartDate), minute(mission.StartDate), second(mission.StartDate)]);
         start_angle = rad2deg(angle(start_position(2)*1i+start_position(1)));
@@ -117,7 +117,7 @@ G = 6.6743e-11; %m3 kg-1 s-2
 T = 2*pi*sqrt(a^3/ext_ENV_muEarth);
 
 mission.Satellite.area = 16;
-mission.Duration = round(3*T);
+mission.Duration = round(T);
 % mission.Duration = 60*60*24*3;
 % mission.Duration = 60*60*120;             
 sim_step_size = 10;
@@ -221,6 +221,6 @@ end
 
 
 %% save mission
-path = '/Users/mariahoflund/Library/CloudStorage/OneDrive-VinterstellarAB/Dokument/MATLAB/3-body-perturbation/';
-filename = 'SSTO_no_3body';
+path = '/Users/mariahoflund/Library/CloudStorage/OneDrive-VinterstellarAB/Dokument/MATLAB/TTC_files/2023-10-03/';
+filename = ['GEO_safe_mode_long' num2str(geo_lla(2)) '_autumn'];
 save([path,filename]);
