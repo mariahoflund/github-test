@@ -30,7 +30,7 @@ R_E = 6.3781e6;     %Earth radius
 
 % Attitude
 attitude_string = "z+ towards the sun, 0.2 deg/s rotation";
-sun_pointing = 1;   % 0: sun pointing out of plane, 1: sun pointing in orbit plane
+sun_pointing = 0;   % 0: sun pointing out of plane, 1: sun pointing in orbit plane
 sun_pointing_SA = 0;    %0: sun ponting SA, 1: pointing in z+
 theta = deg2rad(0);    %add rotation around z to attitude
 
@@ -221,6 +221,6 @@ end
 
 
 %% save mission
-path = '/Users/mariahoflund/Library/CloudStorage/OneDrive-VinterstellarAB/Dokument/MATLAB/TTC_files/2023-10-03/';
-filename = ['GEO_safe_mode_long' num2str(geo_lla(2)) '_autumn'];
-save([path,filename]);
+% path = '/Users/mariahoflund/Library/CloudStorage/OneDrive-VinterstellarAB/Dokument/MATLAB/TTC_files/2023-10-04/';
+% filename = ['GEO_safe_mode_long' num2str(geo_lla(2)) '_autumn'];
+% save([path,filename]);
