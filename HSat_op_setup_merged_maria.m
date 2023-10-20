@@ -1,6 +1,9 @@
 %% Start
-addpath(genpath('./env_models'))
-addpath(genpath('./flight_toolbox'))
+% addpath(genpath('./env_models'))
+% addpath(genpath('./flight_toolbox'))
+
+addpath(genpath('/Users/mariahoflund/Library/CloudStorage/OneDrive-VinterstellarAB/Dokument/HumSat/common/env_models'))
+addpath(genpath('/Users/mariahoflund/Library/CloudStorage/OneDrive-VinterstellarAB/Dokument/HumSat/common/flight_toolbox')) 
 
 %vbs_setup
 %setup files
@@ -117,6 +120,8 @@ ext_SC_SAarea                       = 0.7*0.3;
 ext_SC_SAreflCoeff                  = 1.2;
 
 sun_pointing_SA                     = 0;    % 0: sun pointing, 1: pointing in z+ direction
+
+flip_timer = 100*60;
 
 %% Launch option
 
