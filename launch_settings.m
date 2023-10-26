@@ -386,6 +386,26 @@ switch launchoption
 
         ext_SC_balanced_COE_ECI = [ .500    0.70    1.100 1 1];
 
+    case 'F9SSTOPG250inc285idv1600'
+        %Falcon 9 GTO W/C 1700 m/s idv to GEO (alt apogee 53814 km)  alt perigee 256 km incl 28.5 deg
+        alt_apogee0  = 35249e3;
+        alt_perigee0 =  250e3;
+        incl0  = 28.5;
+        ra0    = alt_apogee0+ext_ENV_Re;
+        rp0    = alt_perigee0+ext_ENV_Re;
+        a0=(ra0+rp0)/2;
+
+        %a0     = 24396e3; %km
+        %ecc0   = 0.728;
+        ecc0   = (ra0-rp0)/(ra0+rp0);
+
+        p0     = a0*(1-ecc0^2); %derived
+        i0     = incl0*pi/180;
+        an0    = 180*pi/180;
+        ap0    = 180*pi/180;
+
+        ext_SC_balanced_COE_ECI = [ .1000 1.9000 3.3000 1 1];
+
     case 'F9GTOPG185inc285idv1840'
         %Falcon 9 GTO W/C 1700 m/s idv to GEO (alt apogee 53814 km)  alt perigee 256 km incl 28.5 deg
         alt_apogee0  = 35700e3;

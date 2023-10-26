@@ -125,7 +125,8 @@ flip_timer = 100*60;
 
 %% Launch option
 
-launchoption = 'A6GTOPG250inc60idv1500';
+% launchoption = 'A6GTOPG250inc60idv1500';
+launchoption = 'F9SSTOPG250inc285idv1600';
 
 [alt_apogee0, alt_perigee0, incl0, ra0, rp0, a0, ecc0, p0, i0, an0, ap0, ext_SC_balanced_COE_ECI] = ...
     launch_settings(launchoption, ext_ENV_Re);
