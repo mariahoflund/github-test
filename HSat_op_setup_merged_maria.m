@@ -121,7 +121,7 @@ ext_SC_SAreflCoeff                  = 1.2;
 
 sun_pointing_SA                     = 0;    % 0: sun pointing, 1: pointing in z+ direction
 
-flip_timer = 100*60;
+flip_timer = 2*60*60;   % 2 hours
 
 %% Launch option
 
@@ -454,7 +454,9 @@ EOR_zposition=-.180; %Number from CAD on Nov 23, 2022
 
 EOR_rposition=0.1525;%Number from CAD on Nov 23, 2022
 
-OR_cant_angle=atan(-EOR_rposition/(EOR_zposition-sim_SC_init_CoG_EOR_wet(3)));
+CoGz = 0.8*sim_SC_init_CoG_EOR_wet(3)+0.2*sim_SC_init_CoG_EOR_dry(3);
+OR_cant_angle=atan(-EOR_rposition/(EOR_zposition-CoGz));
+
 
 sim_EOR_position=[
     EOR_rposition 0 EOR_zposition
@@ -484,7 +486,8 @@ sim_EOR_thrustvec_err_eul=[
 sim_EOR_thrustvec_err_quat=eul2quat(fliplr(sim_EOR_thrustvec_err_eul));
 
 sim_EOR_thrustvec_n_thrusterf=quatrotate(quatinv(sim_EOR_thrustvec_err_quat),sim_EOR_thrustvec_nom_thrusterf);
-sim_EOR_thrustvec_n=quatrotate(quatinv(sim_EOR_scb2thruster_nom_quat),sim_EOR_thrustvec_n_thrusterf);
+% sim_EOR_thrustvec_n=quatrotate(quatinv(sim_EOR_scb2thruster_nom_quat),sim_EOR_thrustvec_n_thrusterf);
+sim_EOR_thrustvec_n=quatrotate(quatinv(sim_EOR_scb2thruster_nom_quat),sim_EOR_thrustvec_nom_thrusterf);
 
 sim_thruster_position=[
     sim_ESK_position
@@ -493,6 +496,18 @@ sim_thruster_position=[
 sim_thrust_vector=[
     sim_ESK_thrustvec_n
     sim_EOR_thrustvec_n];
+
+% figure;
+% for th = 1:3
+% quiver3(sim_EOR_position(th, 1), sim_EOR_position(th, 2), sim_EOR_position(th, 3), ...
+%     sim_EOR_thrustvec_n(th, 1), sim_EOR_thrustvec_n(th, 2), sim_EOR_thrustvec_n(th, 3))
+% hold on
+% end
+% plot3(sim_SC_init_CoG_EOR_wet(1), sim_SC_init_CoG_EOR_wet(2), sim_SC_init_CoG_EOR_wet(3), '.',...
+%     'DisplayName','CoG Wet')
+% plot3(sim_SC_init_CoG_EOR_dry(1), sim_SC_init_CoG_EOR_dry(2), sim_SC_init_CoG_EOR_dry(3), '.', ...
+%      'DisplayName','CoG Dry')
+% legend
 
 sim_thrust_force=[
     SK_thrusterforce
