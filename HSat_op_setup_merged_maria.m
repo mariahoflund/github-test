@@ -383,11 +383,14 @@ sim_SC_init_MoI_EOR_wet=[
 
 OR_vec=[0 0  1];
 sim_init_propellant=207;
-sim_EOR_propellant=139.29;
+% sim_EOR_propellant=139.29;
+sim_EOR_propellant=147;
 sim_SC_init_CoG_propellant=[0 0 0.24758];
-sim_SC_init_CoG_EOR_dry=[-0.00448 0.00106 0.46931];
+% sim_SC_init_CoG_EOR_dry=[-0.00448 0.00106 0.46931];
+sim_SC_init_CoG_EOR_dry=[0 0 0.46931];
 sim_SC_init_CoG_EOR_wet=(sim_SC_init_CoG_EOR_dry*sim_SC_init_dry_mass+sim_SC_init_CoG_propellant*sim_SC_init_propellant_mass)/sim_SC_init_wet_mass;
 sim_SC_mid_CoG_EOR_wet=(sim_SC_init_CoG_EOR_dry*sim_SC_init_dry_mass+(sim_init_propellant-sim_EOR_propellant/2)*sim_SC_init_CoG_propellant)/(sim_SC_init_wet_mass+(sim_init_propellant-sim_EOR_propellant/2));
+sim_SC_init_GEO_CoG_wet = (sim_SC_init_CoG_EOR_dry*sim_SC_init_dry_mass+sim_SC_init_CoG_propellant*(sim_SC_init_propellant_mass-sim_EOR_propellant))/(sim_SC_init_wet_mass-sim_EOR_propellant);
 
 sim_ESK_position=[
     -0.65  -0.5 -0.1+sim_SC_init_CoG_EOR_dry(3)
@@ -454,7 +457,7 @@ EOR_zposition=-.180; %Number from CAD on Nov 23, 2022
 
 EOR_rposition=0.1525;%Number from CAD on Nov 23, 2022
 
-CoGz = 0.8*sim_SC_init_CoG_EOR_wet(3)+0.2*sim_SC_init_CoG_EOR_dry(3);
+CoGz = 0.5*sim_SC_init_CoG_EOR_wet(3)+0.5*sim_SC_init_GEO_CoG_wet(3);
 OR_cant_angle=atan(-EOR_rposition/(EOR_zposition-CoGz));
 
 
@@ -507,6 +510,8 @@ sim_thrust_vector=[
 %     'DisplayName','CoG Wet')
 % plot3(sim_SC_init_CoG_EOR_dry(1), sim_SC_init_CoG_EOR_dry(2), sim_SC_init_CoG_EOR_dry(3), '.', ...
 %      'DisplayName','CoG Dry')
+% plot3(sim_SC_init_GEO_CoG_wet(1), sim_SC_init_GEO_CoG_wet(2), sim_SC_init_GEO_CoG_wet(3), '.', ...
+%     'DisplayName','CoG init GEO')
 % legend
 
 sim_thrust_force=[
