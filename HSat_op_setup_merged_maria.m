@@ -122,10 +122,12 @@ ext_SC_SAreflCoeff                  = 1.2;
 sun_pointing_SA                     = 0;    % 0: sun pointing, 1: pointing in z+ direction
 
 flip_timer = 2*60*60;   % 2 hours
+angle_max = pi/180;
+RW_max = 0.1;
 
 %% Launch option
 
-% launchoption = 'A6GTOPG250inc60idv1500';
+%launchoption = 'A6GTOPG250inc60idv1500';
 launchoption = 'F9SSTOPG250inc285idv1600';
 
 [alt_apogee0, alt_perigee0, incl0, ra0, rp0, a0, ecc0, p0, i0, an0, ap0, ext_SC_balanced_COE_ECI] = ...
